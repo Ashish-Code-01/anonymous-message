@@ -17,6 +17,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 import { signInSchema } from '@/schemas/signInSchema';
+import { FaUserSecret } from 'react-icons/fa';
 
 export default function SignInForm() {
   const router = useRouter();
@@ -59,13 +60,18 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-800">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
-        <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
-            Welcome Back to True Feedback
+    <div className="relative flex justify-center items-center min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-gray-900 overflow-hidden">
+      {/* Decorative blurred shape */}
+      <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-purple-600 opacity-30 rounded-full blur-3xl z-0" />
+      <div className="relative w-full max-w-md p-8 space-y-8 bg-white/90 rounded-2xl shadow-2xl border border-gray-200 z-10 backdrop-blur-md">
+        <div className="flex flex-col items-center text-center">
+          <FaUserSecret className="text-5xl text-purple-700 mb-4 drop-shadow-lg" />
+          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-2 text-gray-900">
+            Welcome Back
           </h1>
-          <p className="mb-4">Sign in to continue your secret conversations</p>
+          <p className="mb-4 text-gray-600 text-lg font-medium">
+            Sign in to continue your secret conversations
+          </p>
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -74,8 +80,11 @@ export default function SignInForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email/Username</FormLabel>
-                  <Input {...field} />
+                  <FormLabel className="text-gray-700">Email/Username</FormLabel>
+                  <Input
+                    {...field}
+                    className="transition-all focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  />
                   <FormMessage />
                 </FormItem>
               )}
@@ -85,19 +94,31 @@ export default function SignInForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <Input type="password" {...field} />
+                  <FormLabel className="text-gray-700">Password</FormLabel>
+                  <Input
+                    type="password"
+                    {...field}
+                    className="transition-all focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  />
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button className='w-full' type="submit">Sign In</Button>
+            <Button
+              className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-all"
+              type="submit"
+            >
+              Sign In
+            </Button>
           </form>
         </Form>
         <div className="text-center mt-4">
-          <p>
+          <p className="text-gray-700">
             Not a member yet?{' '}
-            <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
+            <Link
+              href="/sign-up"
+              className="text-purple-700 font-semibold hover:underline hover:text-indigo-700 transition-all"
+            >
               Sign up
             </Link>
           </p>
